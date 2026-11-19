@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b13">
+<title>HumanX — Digital Human Studio</title>
+<style>
+:root{--bg:#080b13;--panel:#101725;--panel2:#0c1220;--line:#243149;--text:#eef4ff;--muted:#8c9ab2;--cyan:#65e6ff;--violet:#9d8cff;--green:#66e2b2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#1b2b48 0,#080b13 48%);color:var(--text);font:15px/1.5 Inter,system-ui,Segoe UI,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}.shell{max-width:1200px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.4px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--cyan),var(--violet));display:grid;place-items:center;color:#07101c;font-weight:900;font-size:21px;box-shadow:0 0 28px #65e6ff30}.tag{font-size:11px;color:var(--cyan);border:1px solid #65e6ff50;padding:5px 9px;border-radius:30px;letter-spacing:1px}.topnote{color:var(--muted);font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.8fr);gap:18px}.panel{background:linear-gradient(160deg,#111b2b,#0c1220);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 18px 60px #0005}.panelhead{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.panelhead h2{font-size:15px;margin:0}.sub{color:var(--muted);font-size:12px}.stage{min-height:570px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#1b3150 0,#0b1422 48%,#080d17 100%);padding:28px}.gridbg{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent);pointer-events:none}
+.halo{position:absolute;width:min(64%,390px);aspect-ratio:1;border-radius:50%;border:1px solid #65e6ff35;box-shadow:0 0 70px #65e6ff12,inset 0 0 50px #65e6ff0b}
+.avatarWrap{width:min(66%,340px);aspect-ratio:3/4;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 24px 38px #0009)}
+.avatarWrap img{width:100%;height:100%;object-fit:cover;border-radius:48% 48% 22% 22%;border:1px solid #ffffff25;display:none;background:#172338}
+.placeholder{width:100%;height:100%;border-radius:48% 48% 22% 22%;border:1px dashed #5a718e;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);background:linear-gradient(145deg,#1b2b43,#111827)}
+.placeholder .faceicon{font-size:68px;filter:grayscale(.2);margin-bottom:12px}.placeholder strong{color:var(--text);font-size:17px}.placeholder small{margin-top:5px}
+.blink{position:absolute;left:0;right:0;top:34%;height:12%;display:none;pointer-events:none;justify-content:space-evenly;align-items:center;opacity:0}
+.blink span{width:19%;height:3px;border-radius:100%;background:#141a23;box-shadow:0 0 3px #000;transform:scaleY(.7)}
+.avatarWrap.blinking .blink{display:flex;animation:blink .22s ease-in-out}
+@keyframes blink{0%,100%{opacity:0}35%,65%{opacity:.9}}
+.stagebadge{position:absolute;z-index:3;bottom:18px;left:18px;padding:7px 11px;border:1px solid #65e6ff45;background:#07111dcc;border-radius:30px;color:var(--cyan);font-size:11px;letter-spacing:.7px}
+.stagehint{position:absolute;z-index:3;right:18px;bottom:18px;color:#a9b9cf;font-size:11px}
+.uploadzone{padding:17px 20px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}.uploadbtn,.primary,.secondary,.direction button{border:0;border-radius:11px;padding:11px 15px;cursor:pointer;font-weight:700;transition:.2s}.uploadbtn,.primary{background:linear-gradient(100deg,var(--cyan),#a8a0ff);color:#08111d}.uploadbtn:hover,.primary:hover{filter:brightness(1.1);transform:translateY(-1px)}.secondary,.direction button{background:#182438;color:#dce8fa;border:1px solid #2a3b55}.secondary:hover,.direction button:hover{border-color:var(--cyan);color:var(--cyan)}input[type=file]{display:none}
+.rightcol{display:flex;flex-direction:column;gap:18px}.controls{padding:18px 20px}.sectionlabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.3px;margin:0 0 12px}.direction{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.direction button{min-height:48px;font-size:13px}.direction button.active{border-color:var(--cyan);background:#123044;color:var(--cyan);box-shadow:0 0 18px #65e6ff15}.direction button.center{grid-column:2}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.actions button{width:100%}.rangeRow{display:flex;align-items:center;justify-content:space-between;margin:18px 0 7px;color:#dbe6f7;font-size:13px}.rangeRow output{color:var(--cyan);font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--cyan)}
+.status{display:flex;align-items:center;gap:8px;color:var(--green);font-size:12px;margin-top:13px}.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
+.info{padding:17px 20px}.info h3{margin:0 0 8px;font-size:14px}.info p{margin:0;color:var(--muted);font-size:12px;line-height:1.7}.features{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.feature{background:#0b1422;border:1px solid #1d2c42;border-radius:11px;padding:10px;font-size:11px;color:#c8d5e8}.feature b{display:block;color:var(--cyan);font-size:12px;margin-bottom:3px}
+.footer{text-align:center;color:#63738c;font-size:11px;margin:18px 0 5px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;background:#15243a;border:1px solid #3b5675;color:#eaf4ff;padding:10px 15px;border-radius:12px;transition:.25s;z-index:10;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stage{min-height:480px}.rightcol{display:grid;grid-template-columns:1fr 1fr}.rightcol .info{grid-column:1/-1}}
+@media(max-width:540px){.shell{padding:14px}.top{align-items:flex-start}.topnote{display:none}.stage{min-height:420px;padding:18px}.avatarWrap{width:74%}.rightcol{display:flex}.stagehint{display:none}.panelhead{padding:15px}.uploadzone{padding:14px}.uploadzone .sub{width:100%}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand"><div class="logo">H</div><div>HUMANX <span style="color:var(--muted);font-weight:500">STUDIO</span><div class="sub">Digital Human Experience</div></div></div>
+    <div style="text-align:right"><div class="tag">GITHUB PAGES DEMO</div><div class="topnote" style="margin-top:7px">Runs in your browser · No upload to a server</div></div>
+  </header>
+  <main class="layout">
+    <section class="panel">
+      <div class="panelhead"><div><h2>Digital Human Preview</h2><div class="sub">Upload a portrait and explore motion controls</div></div><span class="tag">LIVE PREVIEW</span></div>
+      <div class="stage" id="stage">
+        <div class="gridbg"></div><div class="halo"></div>
+        <div class="avatarWrap" id="avatarWrap">
+          <div class="placeholder" id="placeholder"><div class="faceicon">◉</div><strong>Your digital human</strong><small>Upload a clear, front-facing portrait</small></div>
+          <img id="portrait" alt="Your uploaded portrait preview">
+          <div class="blink" aria-hidden="true"><span></span><span></span></div>
+        </div>
+        <div class="stagebadge" id="poseBadge">POSE · CENTER</div><div class="stagehint">Use the controls to move the head</div>
+      </div>
+      <div class="uploadzone">
+        <label class="uploadbtn" for="photoInput">＋ Upload face photo</label><input id="photoInput" type="file" accept="image/*">
+        <button class="secondary" id="removeBtn">Remove photo</button>
+        <span class="sub">Best result: front-facing, well-lit image</span>
+      </div>
+    </section>
+    <aside class="rightcol">
+      <section class="panel">
+        <div class="panelhead"><div><h2>Head Movement</h2><div class="sub">Directional pose simulation</div></div></div>
+        <div class="controls">
+          <p class="sectionlabel">Look direction</p>
+          <div class="direction">
+            <span></span><button data-pose="up">↑ Up</button><span></span>
+            <button data-pose="left">← Left</button><button class="center active" data-pose="center">● Center</button><button data-pose="right">Right →</button>
+            <span></span><button data-pose="down">↓ Down</button><span></span>
+          </div>
+          <div class="actions"><button class="primary" id="autoBtn">▶ Auto movement</button><button class="secondary" id="blinkBtn">◉ Blink eyes</button></div>
+          <div class="rangeRow"><label for="motionRange">Movement strength</label><output id="motionValue">100%</output></div>
+          <input id="motionRange" type="range" min="30" max="150" value="100">
+          <div class="rangeRow"><label for="speedRange">Auto speed</label><output id="speedValue">1.0×</output></div>
+          <input id="speedRange" type="range" min="5" max="20" value="10">
+          <div class="status"><span class="dot"></span><span id="statusText">Preview ready</span></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panelhead"><div><h2>Expression & Motion</h2><div class="sub">Browser-based visual demo</div></div></div>
+        <div class="info">
+          <h3>Included controls</h3><p>Move the portrait preview left, right, up and down. Trigger a blink effect or start an automatic idle-motion loop.</p>
+          <div class="features">
+            <div class="feature"><b>↔ Head turn</b>Left / right tilt</div>
+            <div class="feature"><b>↕ Head pitch</b>Up / down tilt</div>
+            <div class="feature"><b>◉ Eye blink</b>Animated blink overlay</div>
+            <div class="feature"><b>∞ Idle motion</b>Automatic movement loop</div>
+          </div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="info"><h3>About this demo</h3><p>This is a front-end prototype. It animates the uploaded 2D portrait with perspective transforms; it does not generate a true 3D face, synthesize new side views, or create a real voice clone. Those features need a dedicated AI model/backend.</p></div>
+      </section>
+    </aside>
+  </main>
+  <div class="footer">HUMANX STUDIO · Demo prototype · Only upload images you own or have permission to use.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const wrap=document.getElementById('avatarWrap'), photo=document.getElementById('portrait'), placeholder=document.getElementById('placeholder');
+const poseBadge=document.getElementById('poseBadge'), statusText=document.getElementById('statusText'), toast=document.getElementById('toast');
+const motionRange=document.getElementById('motionRange'), speedRange=document.getElementById('speedRange');
+let pose='center', autoTimer=null, autoIndex=0, toastTimer=null;
+const poses=['center','left','right','up','down'];
+function strength(){return Number(motionRange.value)/100}
+function applyPose(next){
+  pose=next; const s=strength();
+  const map={center:[0,0,0],left:[0,-17*s,-7*s],right:[0,17*s,7*s],up:[-12*s,0,0],down:[12*s,0,0]};
+  const [rx,ry,rz]=map[next]||map.center;
+  wrap.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+  poseBadge.textContent='POSE · '+next.toUpperCase();
+  document.querySelectorAll('[data-pose]').forEach(b=>b.classList.toggle('active',b.dataset.pose===next));
+}
+function blink(){wrap.classList.remove('blinking');void wrap.offsetWidth;wrap.classList.add('blinking');setTimeout(()=>wrap.classList.remove('blinking'),260);statusText.textContent='Blink animation triggered';}
+function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2300)}
+function stopAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null}document.getElementById('autoBtn').textContent='▶ Auto movement'}
+function startAuto(){if(autoTimer){stopAuto();statusText.textContent='Auto movement paused';return}document.getElementById('autoBtn').textContent='Ⅱ Pause movement';statusText.textContent='Auto movement running';const tick=()=>{autoIndex=(autoIndex+1)%poses.length;applyPose(poses[autoIndex]);if(Math.random()>.65)blink()};tick();autoTimer=setInterval(tick,Math.max(500,1400/ (Number(speedRange.value)/10)))}
+document.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{stopAuto();applyPose(b.dataset.pose);statusText.textContent='Pose set to '+b.dataset.pose}));
+document.getElementById('autoBtn').addEventListener('click',startAuto);
+document.getElementById('blinkBtn').addEventListener('click',blink);
+motionRange.addEventListener('input',()=>{document.getElementById('motionValue').value=motionRange.value+'%';applyPose(pose)});
+speedRange.addEventListener('input',()=>{document.getElementById('speedValue').value=(Number(speedRange.value)/10).toFixed(1)+'×';if(autoTimer){stopAuto();startAuto()}});
+document.getElementById('photoInput').addEventListener('change',e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!file.type.startsWith('image/')){showToast('Please choose an image file.');return}
+ const reader=new FileReader();reader.onload=ev=>{photo.src=ev.target.result;photo.style.display='block';placeholder.style.display='none';applyPose('center');statusText.textContent='Portrait loaded locally';showToast('Portrait loaded. It stays in your browser.')};reader.readAsDataURL(file);
+});
+document.getElementById('removeBtn').addEventListener('click',()=>{stopAuto();photo.removeAttribute('src');photo.style.display='none';placeholder.style.display='flex';applyPose('center');statusText.textContent='Preview ready';document.getElementById('photoInput').value='';showToast('Portrait removed')});
+applyPose('center');
+</script>
+</body>
+</html>
