@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070b14">
+<title>HumanX Studio — AI Digital Human Prototype</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<style>
+:root{--bg:#070b14;--panel:#101827;--panel2:#0b1220;--line:#26364d;--text:#eef4ff;--muted:#91a0b7;--cyan:#67e8f9;--violet:#a78bfa;--green:#6ee7b7;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1d3150 0,transparent 55%),var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,Arial,sans-serif}.wrap{max-width:1250px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:850;font-size:20px;letter-spacing:.5px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--cyan),var(--violet));display:grid;place-items:center;color:#08111e;font-size:22px}.muted{color:var(--muted)}.tiny{font-size:11px}.pill{border:1px solid #67e8f955;border-radius:30px;color:var(--cyan);padding:5px 10px;font-size:10px;letter-spacing:1px}.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(310px,.78fr);gap:17px}.panel{background:linear-gradient(150deg,#111c2c,#0c1320);border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 20px 60px #0004}.ph{padding:16px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.ph b{font-size:14px}.stage{height:560px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#1a3451,#0a1422 62%,#080d16)}.grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent)}.halo{position:absolute;width:min(70%,410px);aspect-ratio:1;border:1px solid #67e8f933;border-radius:50%;box-shadow:0 0 65px #67e8f911,inset 0 0 50px #67e8f90b}.portraitWrap{width:min(58%,330px);height:410px;z-index:2;display:grid;place-items:center;transition:transform .25s ease;transform-style:preserve-3d;filter:drop-shadow(0 25px 35px #0009)}.portraitWrap img{display:none;width:100%;height:100%;object-fit:cover;border-radius:48% 48% 23% 23%;border:1px solid #ffffff35}.empty{width:100%;height:100%;border:1px dashed #57708e;border-radius:48% 48% 23% 23%;background:linear-gradient(145deg,#1c2e48,#101827);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;color:var(--muted)}.empty .face{font-size:75px;color:#8aa8c9}.empty strong{color:var(--text);font-size:17px}.videoBox{display:none;position:absolute;inset:0;z-index:3;background:#050912}.videoBox video{width:100%;height:100%;object-fit:contain;transform:scaleX(-1)}#overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:scaleX(-1)}.stageLabel{position:absolute;z-index:4;bottom:15px;left:15px;background:#06101ddd;border:1px solid #67e8f955;color:var(--cyan);padding:7px 11px;border-radius:30px;font-size:10px;letter-spacing:.7px}.stageHelp{position:absolute;z-index:4;right:15px;bottom:17px;font-size:10px;color:#b8c8dc}.uploadbar{padding:14px 18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:750;cursor:pointer;background:#1b2a40;color:#e6f1ff;border:1px solid #31445f}.btn:hover{border-color:var(--cyan);color:var(--cyan)}.primary{background:linear-gradient(100deg,var(--cyan),#b7a4ff);color:#07111e;border:0}.btn:disabled{opacity:.45;cursor:not-allowed}input[type=file]{display:none}.side{display:flex;flex-direction:column;gap:16px}.bodypad{padding:17px 18px}.label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);margin:0 0 11px}.gridbtn{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.gridbtn button{min-height:43px}.gridbtn .active{background:#123447;border-color:var(--cyan);color:var(--cyan)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.actions button{width:100%}.range{display:flex;justify-content:space-between;margin:17px 0 6px;font-size:12px}.range output{color:var(--cyan)}input[type=range]{width:100%;accent-color:var(--cyan)}.status{display:flex;align-items:center;gap:8px;margin-top:13px;font-size:11px;color:var(--green)}.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 9px var(--green)}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{background:#0a1422;border:1px solid #21334b;padding:10px;border-radius:10px}.metric small{display:block;color:var(--muted);font-size:10px}.metric strong{font-size:17px;color:var(--cyan);font-variant-numeric:tabular-nums}.note{font-size:11px;color:var(--muted);line-height:1.7;margin:0}.warning{border:1px solid #775d2e;background:#241d12;color:#f5d99a;padding:10px;border-radius:10px;font-size:11px;line-height:1.6}.footer{text-align:center;color:#687a94;font-size:10px;margin:18px 0}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;background:#17263c;border:1px solid #405c7d;padding:10px 14px;border-radius:10px;transition:.2s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.side .wide{grid-column:1/-1}}@media(max-width:550px){.wrap{padding:12px}.stage{height:470px}.portraitWrap{width:70%;height:360px}.side{display:flex}.stageHelp{display:none}.top .muted{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><div class="brand"><div class="logo">H</div><div>HUMANX <span class="muted">STUDIO</span><div class="tiny muted">Digital Human & Face Motion Lab</div></div></div><div style="text-align:right"><div class="pill">GITHUB PAGES READY</div><div class="tiny muted" style="margin-top:6px">Browser-based prototype · No server required</div></div></header>
+<main class="layout">
+<section class="panel"><div class="ph"><div><b>Digital Human Preview</b><div class="tiny muted">Portrait mode or live face-tracking mode</div></div><span class="pill" id="modePill">PORTRAIT MODE</span></div>
+<div class="stage" id="stage"><div class="grid"></div><div class="halo" id="halo"></div>
+<div class="portraitWrap" id="portraitWrap"><div class="empty" id="empty"><div class="face">◉</div><strong>Bring your digital twin to life</strong><span class="tiny">Upload a portrait or start live tracking</span></div><img id="portrait" alt="Uploaded portrait"></div>
+<div class="videoBox" id="videoBox"><video id="camera" playsinline muted></video><canvas id="overlay"></canvas></div>
+<div class="stageLabel" id="poseLabel">POSE · CENTER</div><div class="stageHelp" id="stageHelp">Use controls to animate portrait</div></div>
+<div class="uploadbar"><label class="btn primary" for="photoInput">＋ Upload portrait</label><input id="photoInput" type="file" accept="image/*"><button class="btn" id="cameraBtn">◎ Start live tracking</button><button class="btn" id="stopBtn" disabled>Stop camera</button><button class="btn" id="clearBtn">Reset</button><span class="tiny muted">Photo stays local in your browser</span></div></section>
+<aside class="side">
+<section class="panel"><div class="ph"><div><b>Head movement</b><div class="tiny muted">Simulated pose controls</div></div></div><div class="bodypad"><p class="label">Look direction</p><div class="gridbtn"><span></span><button class="btn" data-pose="up">↑ Up</button><span></span><button class="btn" data-pose="left">← Left</button><button class="btn active" data-pose="center">● Center</button><button class="btn" data-pose="right">Right →</button><span></span><button class="btn" data-pose="down">↓ Down</button><span></span></div><div class="actions"><button class="btn primary" id="autoBtn">▶ Auto motion</button><button class="btn" id="blinkBtn">◉ Blink eyes</button></div><div class="range"><label>Movement strength</label><output id="strengthOut">100%</output></div><input type="range" id="strength" min="30" max="160" value="100"><div class="range"><label>Auto motion speed</label><output id="speedOut">1.0×</output></div><input type="range" id="speed" min="5" max="20" value="10"><div class="status"><span class="dot"></span><span id="status">Ready</span></div></div></section>
+<section class="panel"><div class="ph"><div><b>Live face tracking</b><div class="tiny muted">Powered by MediaPipe Face Landmarker</div></div><span class="pill">CAMERA</span></div><div class="bodypad"><div class="metrics"><div class="metric"><small>Yaw · Left / Right</small><strong id="yaw">—</strong></div><div class="metric"><small>Pitch · Up / Down</small><strong id="pitch">—</strong></div><div class="metric"><small>Eye blink</small><strong id="blinkState">—</strong></div><div class="metric"><small>Face detected</small><strong id="detected">No</strong></div></div><p class="note" style="margin-top:12px">Allow camera permission. Your face landmarks are processed in this browser session; video is not uploaded by this demo.</p></div></section>
+<section class="panel wide"><div class="bodypad"><b style="font-size:13px">What this version can do</b><p class="note" style="margin-top:7px">Live camera face tracking detects head direction and eye-blink blendshapes. Portrait mode adds interactive perspective motion to your uploaded photo. This is not yet a reconstructed 3D identity: a single photo cannot reveal unseen side surfaces or create a true 3D face. A production-grade 3D clone needs a dedicated reconstruction model/API and more input views.</p><div class="warning" style="margin-top:12px">Use only your own face or a person’s face with their clear permission. Camera access requires HTTPS or localhost; GitHub Pages provides HTTPS.</div></div></section>
+</aside></main><div class="footer">HUMANX STUDIO · Open-source demo · Built for GitHub Pages</div></div><div class="toast" id="toast"></div>
+<script type="module">
+import { FaceLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+const $=id=>document.getElementById(id);
+const wrap=$('portraitWrap'),img=$('portrait'),empty=$('empty'),video=$('camera'),videoBox=$('videoBox'),canvas=$('overlay'),ctx=canvas.getContext('2d');
+let pose='center',auto=null,autoIndex=0,stream=null,landmarker=null,raf=0,lastVideoTime=-1,blinkWas=false,toastTimer;
+const poses=['center','left','right','up','down'];
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2500)}
+function setStatus(t){$('status').textContent=t}
+function setPose(p){pose=p;const s=+$('strength').value/100;const map={center:[0,0,0],left:[0,-18*s,-7*s],right:[0,18*s,7*s],up:[-13*s,0,0],down:[13*s,0,0]};const [x,y,z]=map[p];wrap.style.transform=`perspective(900px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;$('poseLabel').textContent='POSE · '+p.toUpperCase();document.querySelectorAll('[data-pose]').forEach(b=>b.classList.toggle('active',b.dataset.pose===p))}
+function blink(){wrap.animate([{transform:wrap.style.transform+' scaleY(1)'},{transform:wrap.style.transform+' scaleY(.985)'},{transform:wrap.style.transform+' scaleY(1)'}],{duration:230,easing:'ease-in-out'});$('blinkState').textContent='Blink!'}
+function stopAuto(){if(auto){clearInterval(auto);auto=null}$('autoBtn').textContent='▶ Auto motion'}
+function autoMotion(){if(auto){stopAuto();setStatus('Auto motion paused');return}$('autoBtn').textContent='Ⅱ Pause motion';setStatus('Auto motion running');const tick=()=>{autoIndex=(autoIndex+1)%poses.length;setPose(poses[autoIndex]);if(Math.random()>.65)blink()};tick();auto=setInterval(tick,Math.max(500,1400/(+$('speed').value/10)))}
+document.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{stopAuto();setPose(b.dataset.pose);setStatus('Portrait pose: '+b.dataset.pose)}));
+$('autoBtn').onclick=autoMotion;$('blinkBtn').onclick=blink;
+$('strength').oninput=()=>{$('strengthOut').value=$('strength').value+'%';setPose(pose)};
+$('speed').oninput=()=>{$('speedOut').value=(+$('speed').value/10).toFixed(1)+'×';if(auto){stopAuto();autoMotion()}};
+$('photoInput').onchange=e=>{const f=e.target.files?.[0];if(!f)return;if(!f.type.startsWith('image/'))return toast('Choose an image file.');const u=URL.createObjectURL(f);img.src=u;img.style.display='block';empty.style.display='none';$('modePill').textContent='PORTRAIT MODE';videoBox.style.display='none';setPose('center');setStatus('Portrait loaded locally');toast('Portrait loaded in this browser')};
+$('clearBtn').onclick=()=>{stopAuto();img.removeAttribute('src');img.style.display='none';empty.style.display='flex';setPose('center');setStatus('Ready');$('photoInput').value='';};
+function drawResults(result){
+ const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*devicePixelRatio)||canvas.height!==Math.round(h*devicePixelRatio)){canvas.width=Math.round(w*devicePixelRatio);canvas.height=Math.round(h*devicePixelRatio)}
+ ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);ctx.clearRect(0,0,w,h);
+ const faces=result.faceLandmarks||[];$('detected').textContent=faces.length?'Yes':'No';
+ if(!faces.length){$('yaw').textContent='—';$('pitch').textContent='—';$('blinkState').textContent='—';return}
+ const pts=faces[0], nose=pts[1], left=pts[234],right=pts[454],forehead=pts[10],chin=pts[152];
+ // Normalized face asymmetry provides a useful approximate yaw/pitch indicator.
+ const eyeL=pts[33],eyeR=pts[263],eyeMid=(eyeL.x+eyeR.x)/2;
+ const faceMid=(left.x+right.x)/2;const yawVal=Math.max(-90,Math.min(90,(nose.x-faceMid)*240));
+ const verticalMid=(forehead.y+chin.y)/2;const pitchVal=Math.max(-90,Math.min(90,(nose.y-verticalMid)*220));
+ $('yaw').textContent=(yawVal>0?'+':'')+yawVal.toFixed(0)+'°';$('pitch').textContent=(pitchVal>0?'+':'')+pitchVal.toFixed(0)+'°';
+ // Draw a light face landmark constellation on top of the mirrored camera preview.
+ ctx.fillStyle='#67e8f9';for(let i=0;i<pts.length;i+=5){const p=pts[i];ctx.beginPath();ctx.arc((1-p.x)*w,p.y*h,1.25,0,Math.PI*2);ctx.fill()}
+ const cats=result.faceBlendshapes?.[0]?.categories||[];
+ const get=n=>cats.find(c=>c.categoryName===n)?.score||0;
+ const blinkScore=Math.max(get('eyeBlinkLeft'),get('eyeBlinkRight'));const isBlink=blinkScore>.55;
+ $('blinkState').textContent=isBlink?'Blinking':'Open';
+ if(isBlink&&!blinkWas)setStatus('Eye blink detected');blinkWas=isBlink;
+ // Show head direction in status without taking over the live video.
+ const direction=Math.abs(yawVal)>13?(yawVal>0?'turned left':'turned right'):Math.abs(pitchVal)>13?(pitchVal>0?'tilted down':'tilted up'):'looking forward';
+ $('poseLabel').textContent='LIVE FACE · '+direction.toUpperCase();
+}
+async function startCamera(){
+ try{
+  setStatus('Requesting camera permission…');
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}},audio:false});
+  video.srcObject=stream;await video.play();
+  $('modePill').textContent='LIVE TRACKING';videoBox.style.display='block';wrap.style.display='none';$('stageHelp').textContent='Live camera preview · local processing';
+  setStatus('Loading face tracking model…');
+  const vision=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+  landmarker=await FaceLandmarker.createFromOptions(vision,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},runningMode:'VIDEO',numFaces:1,outputFaceBlendshapes:true,outputFacialTransformationMatrixes:true});
+  $('cameraBtn').disabled=true;$('stopBtn').disabled=false;setStatus('Live face tracking active');toast('Face tracking started');
+  const loop=()=>{if(!stream)return;if(video.readyState>=2&&video.currentTime!==lastVideoTime){lastVideoTime=video.currentTime;try{const res=landmarker.detectForVideo(video,performance.now());drawResults(res)}catch(err){console.warn(err)}}raf=requestAnimationFrame(loop)};loop();
+ }catch(err){console.error(err);stopCamera();setStatus('Camera/model unavailable');toast(err.name==='NotAllowedError'?'Camera permission denied':'Could not start tracking. Check internet and camera access.')}
+}
+function stopCamera(){
+ if(raf)cancelAnimationFrame(raf);raf=0;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+ video.pause();video.srcObject=null;videoBox.style.display='none';wrap.style.display='grid';$('cameraBtn').disabled=false;$('stopBtn').disabled=true;$('modePill').textContent='PORTRAIT MODE';$('stageHelp').textContent='Use controls to animate portrait';ctx.clearRect(0,0,canvas.width,canvas.height);$('detected').textContent='No';$('yaw').textContent='—';$('pitch').textContent='—';$('blinkState').textContent='—';setPose('center');setStatus('Camera stopped');
+}
+$('cameraBtn').onclick=startCamera;$('stopBtn').onclick=stopCamera;
+setPose('center');
+</script></body></html>
